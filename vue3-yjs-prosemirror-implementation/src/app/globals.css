@@ -1,0 +1,470 @@
+@import "tailwindcss";
+
+:root {
+  --feishu-blue: #3370ff;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Segoe UI", sans-serif;
+}
+
+/* ===== ProseMirror / Tiptap 编辑区排版(飞书风格) ===== */
+.tiptap {
+  outline: none;
+  min-height: 65vh;
+  color: #1f2329;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.tiptap > * + * {
+  margin-top: 0.5em;
+}
+
+.tiptap h1 {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 1em;
+  color: #1f2329;
+}
+
+.tiptap h2 {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 0.9em;
+}
+
+.tiptap h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 0.8em;
+}
+
+.tiptap ul {
+  list-style: disc;
+  padding-left: 1.6em;
+}
+
+.tiptap ol {
+  list-style: decimal;
+  padding-left: 1.6em;
+}
+
+.tiptap li > p {
+  margin: 0;
+}
+
+.tiptap blockquote {
+  border-left: 3px solid #3370ff;
+  background: #f0f4ff;
+  padding: 8px 14px;
+  border-radius: 0 6px 6px 0;
+  color: #51565d;
+}
+
+.tiptap code {
+  background: #f2f3f5;
+  border: 1px solid #e6e8eb;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.88em;
+  color: #d83931;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+}
+
+.tiptap pre {
+  background: #f6f8fa;
+  border: 1px solid #e6e8eb;
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+}
+
+.tiptap pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #1f2329;
+  font-size: 13px;
+}
+
+.tiptap hr {
+  border: none;
+  border-top: 1px solid #e6e8eb;
+  margin: 1.4em 0;
+}
+
+.tiptap a {
+  color: #3370ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #bbbfc4;
+  pointer-events: none;
+  height: 0;
+}
+
+/* 协同光标(y-prosemirror 风格类名,预留给 ws awareness 升级) */
+.tiptap .collaboration-cursor__caret {
+  border-left: 1px solid;
+  border-right: 1px solid;
+  margin-left: -1px;
+  margin-right: -1px;
+  position: relative;
+  word-break: normal;
+}
+
+/* ===== 链接 ===== */
+.tiptap a {
+  color: #3370ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-all;
+}
+
+/* ===== 文本高亮(荧光笔) ===== */
+.tiptap mark {
+  background: #fff1b8;
+  border-radius: 2px;
+  padding: 0 1px;
+  color: inherit;
+}
+
+/* ===== 代码块 ===== */
+.tiptap pre {
+  position: relative;
+  background: #f7f8fa;
+  border: 1px solid #e6e8eb;
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.tiptap pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #24292f;
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+}
+
+/* lowlight / highlight.js token 配色(GitHub Light) */
+.hljs-comment,
+.hljs-quote {
+  color: #6a737d;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-formula {
+  color: #cf222e;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #0a7d33;
+}
+.hljs-number,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #0550ae;
+}
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.function_,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #8250df;
+}
+.hljs-attr,
+.hljs-built_in,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-params {
+  color: #953800;
+}
+.hljs-meta,
+.hljs-tag {
+  color: #116329;
+}
+.hljs-deletion {
+  color: #82071e;
+  background: #ffebe9;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 600;
+}
+
+/* ===== 同步块 ===== */
+.tiptap .sync-block {
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-left: 3px solid #3370ff;
+  border-radius: 0 8px 8px 0;
+  background: #f7faff;
+  transition: background 0.15s ease;
+}
+
+.tiptap .sync-block:focus-within {
+  background: #f0f6ff;
+  box-shadow: 0 0 0 2px rgba(51, 112, 255, 0.12);
+}
+
+.tiptap .sync-block textarea {
+  font-family: inherit;
+}
+
+.tiptap .sync-block-static {
+  border-left: 3px solid #3370ff;
+  padding: 8px 12px;
+  background: #f7faff;
+}
+
+/* ===== 任务列表之类的基础块 ===== */
+.tiptap p {
+  margin: 0;
+}
+
+.tiptap > * + * {
+  margin-top: 0.45em;
+}
+
+.tiptap ::selection {
+  background: #cfe0ff;
+}
+
+/* ===== 划词评论 / 读书笔记高亮 ===== */
+.tiptap .comment-mark {
+  background: #fff8e3;
+  border-bottom: 1px solid #ffc94d;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.tiptap .comment-mark:hover {
+  background: #ffe9a8;
+}
+
+.tiptap .comment-mark-active {
+  background: #ffe9a8;
+  border-bottom-color: #f59f00;
+}
+
+.tiptap .comment-mark-resolved {
+  background: #f2f3f5;
+  border-bottom-color: #c9cdd4;
+}
+
+.tiptap .comment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 3px;
+  padding: 0 4px;
+  height: 15px;
+  vertical-align: 1px;
+  border-radius: 8px;
+  background: #f2f3f5;
+  color: #8a9099;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #e6e8eb;
+}
+
+.tiptap .comment-badge-active {
+  background: #e8eefb;
+  color: #3370ff;
+  border-color: #cdddfb;
+}
+
+/* 评论卡片里的引用截断 */
+.line-clamp-2,
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  -webkit-line-clamp: 3;
+}
+
+/* ===== 评论正文:Markdown + 公式 + 图片 ===== */
+.md-body {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #374151;
+  word-break: break-word;
+}
+
+.md-body > * + * {
+  margin-top: 0.4em;
+}
+
+.md-body p {
+  margin: 0;
+}
+
+.md-body h1,
+.md-body h2,
+.md-body h3 {
+  font-weight: 600;
+  color: #1f2329;
+  line-height: 1.4;
+}
+
+.md-body h1 { font-size: 15px; }
+.md-body h2 { font-size: 14px; }
+.md-body h3 { font-size: 13px; }
+
+.md-body ul {
+  list-style: disc;
+  padding-left: 1.3em;
+}
+
+.md-body ol {
+  list-style: decimal;
+  padding-left: 1.3em;
+}
+
+.md-body li::marker {
+  color: #9ca3af;
+}
+
+.md-body blockquote {
+  border-left: 3px solid #d0d5dd;
+  padding: 2px 10px;
+  color: #6b7280;
+  background: #fafbfc;
+  border-radius: 0 4px 4px 0;
+}
+
+.md-body code {
+  background: #f2f3f5;
+  border: 1px solid #e6e8eb;
+  border-radius: 4px;
+  padding: 0 4px;
+  font-size: 0.88em;
+  color: #d83931;
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+.md-body pre {
+  background: #f6f8fa;
+  border: 1px solid #e6e8eb;
+  border-radius: 6px;
+  padding: 8px 10px;
+  overflow-x: auto;
+}
+
+.md-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #1f2329;
+  font-size: 12px;
+}
+
+.md-body a {
+  color: #3370ff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.md-body table {
+  border-collapse: collapse;
+  font-size: 12px;
+  display: block;
+  overflow-x: auto;
+}
+
+.md-body th,
+.md-body td {
+  border: 1px solid #e6e8eb;
+  padding: 3px 8px;
+}
+
+.md-body th {
+  background: #fafbfc;
+  font-weight: 600;
+}
+
+.md-body hr {
+  border: none;
+  border-top: 1px solid #e6e8eb;
+}
+
+.md-body input[type="checkbox"] {
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.md-img {
+  max-width: 100%;
+  max-height: 240px;
+  border-radius: 6px;
+  border: 1px solid #e6e8eb;
+  cursor: zoom-in;
+  display: block;
+}
+
+.md-compact .md-img {
+  max-height: 72px;
+}
+
+/* KaTeX 在小字号卡片里的微调 */
+.md-body .katex {
+  font-size: 1.02em;
+}
+
+.md-body .katex-display {
+  margin: 0.4em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+}
+
+/* 悬浮卡里的内容裁剪为三行(朴素截断,无渐隐遮罩) */
+.md-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.md-clamp .md-body > * + * {
+  margin-top: 0.2em;
+}
